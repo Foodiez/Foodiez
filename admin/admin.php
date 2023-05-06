@@ -12,16 +12,25 @@
     <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div class="bg-white rounded-lg p-6">
-        <h2 class="text-xl font-bold mb-4">Total Orders</h2>
+        <h2 class="text-xl font-bold mb-4">Active categories</h2>
         <p class="text-gray-700 text-4xl font-bold">1500</p>
       </div>
       <div class="bg-white rounded-lg p-6">
-        <h2 class="text-xl font-bold mb-4">New Orders</h2>
+        <h2 class="text-xl font-bold mb-4">Total users</h2>
         <p class="text-gray-700 text-4xl font-bold">120</p>
       </div>
       <div class="bg-white rounded-lg p-6">
         <h2 class="text-xl font-bold mb-4">Total Revenue</h2>
-        <p class="text-gray-700 text-4xl font-bold">$45,000</p>
+        <?php
+        $sql = "SELECT SUM(total_amt) AS count FROM customer";
+        $res=mysqli_query($conn, $sql) or die(mysqli_error());
+        $total = 0;
+        $rec= $res->fetch_assoc();
+        $total = $rec['count'];
+        ?>
+        <p class="text-gray-700 text-4xl font-bold">Rs. <?php echo $total; ?></p>
+        <?php
+        ?>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@
     <title>Update category</title>
 </head>
 <body>
-    <?php 
+<?php 
         include 'navbar.php';
         $id=$_GET['id'];
         $sql="SELECT * FROM category where id=$id";
@@ -18,23 +18,50 @@
           if($count==1)
           {
             $row=mysqli_fetch_assoc($res);
-            $title=$row['title'];
+						$title=$row['title'];
+            $image_name=$row['image_name'];
+            $featured=$row['featured'];
+						$active=$row['active'];
           }
           else
           {
-            header("location:http://localhost/Foodiez/admin");
+            header("location:".URL_1);
           }
 
         }
         
     ?>
 <div style="padding: 20px;" class="max-w-md mx-auto">
-  <form action="" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <form action="" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
     <div class="mb-4">
       <label class="block text-gray-700 font-bold mb-2" for="title">
         Title
       </label>
       <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" name="title" type="text" value='<?php echo $title?>'>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="image">
+        Select image
+      </label>
+      <input type="file"  name="image">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="featured">
+        Featured
+      </label>
+      <input type="radio" value="Yes" name="featured" class="form-radio h-4 w-4 text-indigo-600">
+      <label class="ml-2 text-gray-700">Yes</label>
+      <input type="radio" value="No" name="featured" class="form-radio h-4 w-4 text-indigo-600">
+      <label class="ml-2 text-gray-700">No</label>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-bold mb-2" for="active">
+        Active
+      </label>
+      <input type="radio" value="Yes" name="active" class="form-radio h-4 w-4 text-indigo-600">
+      <label class="ml-2 text-gray-700">Yes</label>
+      <input type="radio" value="No" name="active" class="form-radio h-4 w-4 text-indigo-600">
+      <label class="ml-2 text-gray-700">No</label>
     </div>
     <div class="flex items-center justify-between">
         <input type='hidden' name='id' value='<?php echo $id; ?>'>
@@ -51,21 +78,57 @@
 
 if (isset($_POST['submit'])) {
  // Get form data
-$id = $_POST['id']; 
 $title = $_POST['title'];
 
 
-$sql = "UPDATE category SET title=$title WHERE id='$id'";
 
-$res=mysqli_query($conn, $sql);
-if($res==TRUE)
+if (isset($_POST['featured']))
 {
-  header("location:http://localhost/Foodiez/admin/display_message_1.php");
+  $featured = $_POST['featured'];
 }
 else
 {
-  header("location:http://localhost/Foodiez/admin/display_message_2.php");
+  $featured = "No";
 }
+if (isset($_FILES['image']['name']))
+{
+  $image = $_FILES['image'];
+  $image_name=$image['name'];
+  $destination_path="../images/category/".$image_name;
+  $upload=move_uploaded_file($image['tmp_name'],$destination_path);
+  if($upload==false)
+  {
+    header("location:http://localhost/Foodiez/admin/add-category.php");
+    die();
+  }
+}
+else
+{
+  $image_name="";
+}
+
+{
+  $active = $_POST['active'];
+}
+
+if (isset($_POST['active']))
+{
+  $active = $_POST['active'];
+}
+else
+{
+  $active = "No";
+}
+$sql = "UPDATE category SET title='$title', image_name='$image_name', featured='$featured', active='$active' WHERE id='$id'";
+
+$res=mysqli_query($conn, $sql) or die(mysqli_error());
+
+
+if ($res==TRUE) {
+  header("location:http://localhost/Foodiez/admin/display_message_1.php");
+  } else {
+    header("location:http://localhost/Foodiez/admin/display_message_2.php");
+  }
 }
 
 ?>

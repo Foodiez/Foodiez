@@ -70,9 +70,15 @@ else
 }
 if (isset($_FILES['image']['name']))
 {
-  $image_name=$_FILES['image']['name'];
-  $source_path=$_FILES['image']['tmp_name'];
-  $destination_path="";
+  $image = $_FILES['image'];
+  $image_name=$image['name'];
+  $destination_path="../images/category/".$image_name;
+  $upload=move_uploaded_file($image['tmp_name'],$destination_path);
+  if($upload==false)
+  {
+    header("location:http://localhost/Foodiez/admin/add-category.php");
+    die();
+  }
 }
 else
 {
@@ -92,7 +98,7 @@ else
   $active = "No";
 }
 
-$sql = "INSERT INTO category (title, featured, active) VALUES ('$title', '$featured', '$active')";
+$sql = "INSERT INTO category (title, image_name, featured, active) VALUES ('$title','$image_name','$featured', '$active')";
 
 $res=mysqli_query($conn, $sql) or die(mysqli_error());
 

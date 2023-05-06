@@ -21,6 +21,15 @@
         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
           Title
         </th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Image
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Featured
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Active
+        </th>
         <th scope="col" class="relative px-6 py-3">
           <span class="sr-only">Update</span>
         </th>
@@ -41,6 +50,9 @@
 					{
 						$id=$row['id'];
 						$title=$row['title'];
+                        $image_name=$row['image_name'];
+                        $featured=$row['featured'];
+						$active=$row['active'];
 					?>
 						<tr>
         					<td class="px-6 py-4 whitespace-nowrap">
@@ -48,6 +60,46 @@
             						<div class="ml-4">
               							<div class="text-sm font-medium text-gray-900">
                 							<?php echo $title;
+											?>
+              							</div>
+              					    </div>
+          						</div>
+        					</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+          						<div class="flex items-center">
+            						<div class="ml-4">
+              							<div class="text-sm font-medium text-gray-900">
+                							<?php 
+                                                if($image_name!="")
+                                                {
+                                                    ?>
+                                                    <img src="http://localhost/Foodiez/images/category/<?php echo $image_name; ?>" width="150" height="150">
+                                                    <?php
+                                                }
+                                                else
+                                                {
+                                                    echo "No image available.";
+                                                }
+											?>
+              							</div>
+              					    </div>
+          						</div>
+        					</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+          						<div class="flex items-center">
+            						<div class="ml-4">
+              							<div class="text-sm font-medium text-gray-900">
+                							<?php echo $featured;
+											?>
+              							</div>
+              					    </div>
+          						</div>
+        					</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+          						<div class="flex items-center">
+            						<div class="ml-4">
+              							<div class="text-sm font-medium text-gray-900">
+                							<?php echo $active;
 											?>
               							</div>
               					    </div>

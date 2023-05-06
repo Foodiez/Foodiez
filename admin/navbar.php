@@ -14,7 +14,7 @@
         <a href="manage-admin.php" class="text-white mr-6">Admin</a>
         <a href="new.php" class="text-white mr-6">Orders</a>
         <a href="manage-category.php" class="text-white mr-6">Category</a>
-        <a href="#" class="text-white mr-6">Food</a>
+        <a href="manage-food.php" class="text-white mr-6">Food</a>
       </div>
     </div>
   </nav>
