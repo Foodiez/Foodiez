@@ -69,10 +69,21 @@ $res=mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
 
 if ($res==TRUE) {
-  header("location:http://localhost/Foodiez/user/home.php");
+    $sql1 = "SELECT * FROM customer WHERE username='$username' AND password='$password'";
+    $res1=mysqli_query($conn, $sql1) or die(mysqli_error());
+    if ($res1==TRUE) {
+        $count=mysqli_num_rows($res1);
+        if($count==1)
+        {
+            $row = $res1->fetch_assoc();
+            session_start();
+            $id=$row['id'];
+            $_SESSION['user_id']=$id;
+            header("location: http://localhost/Foodiez/user/home.php?");
+        }
   } else {
     header("location:http://localhost/Foodiez/user/register.php");
   }
 }
-
+}
 ?>

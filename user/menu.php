@@ -66,7 +66,7 @@
                             <h3 class="text-lg font-semibold mb-2"><?php echo $title; ?></h3>
                             <p class="text-gray-100"><?php echo $description; ?></p>
                             </div>
-                            <button class="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-full hover:bg-blue-600">Add to cart</button>
+                            <a href='http://localhost/Foodiez/user/cart.php?id=<?php echo $id; ?>'><button class="px-4 py-2 bg-yellow-500 text-white font-semibold rounded-full hover:bg-blue-600">Add to cart</button></a>
                             </div>
                             </div>
                             </div>

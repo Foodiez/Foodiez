@@ -13,7 +13,7 @@
         <a href="home.php" class="text-white mr-6">Home</a>
         <a href="category.php" class="text-white mr-6">Categories</a>
         <a href="menu.php" class="text-white mr-6">Menu</a>
-        <a href="manage-food.php" class="text-white mr-6">Cart</a>
+        <a href="cart.php?id=-1" class="text-white mr-6">Cart</a>
       </div>
     </div>
   </nav>

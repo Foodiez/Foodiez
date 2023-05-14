@@ -57,7 +57,11 @@ if ($res==TRUE) {
     $count=mysqli_num_rows($res);
     if($count==1)
     {
-      header("location:http://localhost/Foodiez/user/home.php");
+        $row = $res->fetch_assoc();
+        session_start();
+        $id=$row['id'];
+        $_SESSION['user_id']=$id;
+        header("location:http://localhost/Foodiez/user/home.php");
     }
     else
     {
